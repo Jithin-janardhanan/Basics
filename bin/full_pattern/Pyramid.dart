@@ -1,19 +1,33 @@
 import 'dart:io';
 
 void main() {
-  int i, j, k, n;
+  int? n;
 
-  print('Enter the number');
-  n = int.parse(stdin.readLineSync()!);
+  print('Enter the number:');
+  String? input = stdin.readLineSync(); // Read input
 
-  for (i = 1; i <= n; i++) {
-    for (j = 0; j < i; j++) {
+  // Check if input is null or empty, if so, provide a default or retry
+  if (input == null || input.trim().isEmpty) {
+    print("Invalid input. Please enter a valid number.");
+    return;
+  }
+
+  // Try parsing input to an integer, handle potential errors
+  try {
+    n = int.parse(input);
+  } catch (e) {
+    print(e);
+    return;
+  }
+
+  for (int i = 1; i <= n; i++) {
+    for (int j = 0; j < i; j++) {
       stdout.write(' ');
     }
-    for (k = n - i; k >= 0; k--) {
+    for (int k = n - i; k >= 0; k--) {
       stdout.write('* ');
     }
-
     print('');
   }
 }
+
